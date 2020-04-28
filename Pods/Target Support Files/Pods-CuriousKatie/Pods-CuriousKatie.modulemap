@@ -1,0 +1,6 @@
+module Pods_CuriousKatie {
+  umbrella header "Pods-CuriousKatie-umbrella.h"
+
+  export *
+  module * { export * }
+}
