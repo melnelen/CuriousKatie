@@ -9,15 +9,15 @@
 import Foundation
 
 class Interest {
-    let category: String
-    let gear: [String]
-    let difficulty: String
-    let environment: String
+    let name: String
+    let category: Category
+    let gear: [Gear]
+    let environment: Environment
     
-    init(category: String, gear: [String], difficulty: String, environment: String) {
+    init(name: String, category: Category, gear: [Gear], environment: Environment) {
+        self.name = name
         self.category = category
         self.gear = gear
-        self.difficulty = difficulty
         self.environment = environment
     }
 }
