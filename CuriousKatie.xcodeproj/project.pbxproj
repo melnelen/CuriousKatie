@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1721C7DD8B7BCE2491AC29 /* libPods-CuriousKatie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEF6D4707DC58750CE38C24 /* libPods-CuriousKatie.a */; };
 		D0ABA107244762B9008B5C88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABA106244762B9008B5C88 /* AppDelegate.swift */; };
 		D0ABA109244762B9008B5C88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABA108244762B9008B5C88 /* SceneDelegate.swift */; };
 		D0ABA10B244762B9008B5C88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABA10A244762B9008B5C88 /* ViewController.swift */; };
@@ -14,9 +15,15 @@
 		D0ABA110244762BB008B5C88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0ABA10F244762BB008B5C88 /* Assets.xcassets */; };
 		D0ABA113244762BB008B5C88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0ABA111244762BB008B5C88 /* LaunchScreen.storyboard */; };
 		D0E23B032458523B0084CA99 /* swiftlint.sh in Resources */ = {isa = PBXBuildFile; fileRef = D0E23B022458523B0084CA99 /* swiftlint.sh */; };
+		D0E23B062458A2DB0084CA99 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E23B052458A2DB0084CA99 /* Person.swift */; };
+		D0E23B082458A68F0084CA99 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E23B072458A68F0084CA99 /* Interest.swift */; };
+		D0EDA7ED2459F84100A17041 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7EC2459F84100A17041 /* Category.swift */; };
+		D0EDA7F12459FF9B00A17041 /* Gear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7F02459FF9B00A17041 /* Gear.swift */; };
+		D0EDA7F3245A0AC800A17041 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7F2245A0AC800A17041 /* Environment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A1359A008161423CB53D59F3 /* Pods-CuriousKatie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CuriousKatie.debug.xcconfig"; path = "Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie.debug.xcconfig"; sourceTree = "<group>"; };
 		D0ABA103244762B9008B5C88 /* CuriousKatie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CuriousKatie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0ABA106244762B9008B5C88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0ABA108244762B9008B5C88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +33,13 @@
 		D0ABA112244762BB008B5C88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0ABA114244762BB008B5C88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0E23B022458523B0084CA99 /* swiftlint.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = swiftlint.sh; sourceTree = "<group>"; };
+		D0E23B052458A2DB0084CA99 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		D0E23B072458A68F0084CA99 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
+		D0EDA7EC2459F84100A17041 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		D0EDA7F02459FF9B00A17041 /* Gear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gear.swift; sourceTree = "<group>"; };
+		D0EDA7F2245A0AC800A17041 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		E5BDCF04E18E53CF77C98007 /* Pods-CuriousKatie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CuriousKatie.release.xcconfig"; path = "Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie.release.xcconfig"; sourceTree = "<group>"; };
+		EDEF6D4707DC58750CE38C24 /* libPods-CuriousKatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CuriousKatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,18 +47,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1721C7DD8B7BCE2491AC29 /* libPods-CuriousKatie.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		126A0223FB620010DFE76C7F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1359A008161423CB53D59F3 /* Pods-CuriousKatie.debug.xcconfig */,
+				E5BDCF04E18E53CF77C98007 /* Pods-CuriousKatie.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9D2FB429EF10919F3A27C437 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDEF6D4707DC58750CE38C24 /* libPods-CuriousKatie.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D0ABA0FA244762B9008B5C88 = {
 			isa = PBXGroup;
 			children = (
 				D0E23B01245851970084CA99 /* Scripts */,
 				D0ABA105244762B9008B5C88 /* CuriousKatie */,
 				D0ABA104244762B9008B5C88 /* Products */,
+				126A0223FB620010DFE76C7F /* Pods */,
+				9D2FB429EF10919F3A27C437 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +93,7 @@
 		D0ABA105244762B9008B5C88 /* CuriousKatie */ = {
 			isa = PBXGroup;
 			children = (
+				D0EDA7E92459F0B500A17041 /* Resources */,
 				D0ABA106244762B9008B5C88 /* AppDelegate.swift */,
 				D0ABA108244762B9008B5C88 /* SceneDelegate.swift */,
 				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
@@ -66,6 +101,8 @@
 				D0ABA10F244762BB008B5C88 /* Assets.xcassets */,
 				D0ABA111244762BB008B5C88 /* LaunchScreen.storyboard */,
 				D0ABA114244762BB008B5C88 /* Info.plist */,
+				D0E23B052458A2DB0084CA99 /* Person.swift */,
+				D0E23B072458A68F0084CA99 /* Interest.swift */,
 			);
 			path = CuriousKatie;
 			sourceTree = "<group>";
@@ -78,6 +115,16 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		D0EDA7E92459F0B500A17041 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D0EDA7EC2459F84100A17041 /* Category.swift */,
+				D0EDA7F02459FF9B00A17041 /* Gear.swift */,
+				D0EDA7F2245A0AC800A17041 /* Environment.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -85,10 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0ABA117244762BB008B5C88 /* Build configuration list for PBXNativeTarget "CuriousKatie" */;
 			buildPhases = (
+				D78777B9491A0825992030D2 /* [CP] Check Pods Manifest.lock */,
 				D0ABA0FF244762B9008B5C88 /* Sources */,
 				D0ABA100244762B9008B5C88 /* Frameworks */,
 				D0ABA101244762B9008B5C88 /* Resources */,
 				D0E23B04245855E60084CA99 /* SwiftLint */,
+				D7B1590B099E605E53D40F89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -165,6 +214,45 @@
 			shellPath = /bin/sh;
 			shellScript = "$SRCROOT/Scripts/swiftlint.sh\n";
 		};
+		D78777B9491A0825992030D2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CuriousKatie-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7B1590B099E605E53D40F89 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -172,9 +260,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0EDA7F12459FF9B00A17041 /* Gear.swift in Sources */,
+				D0EDA7F3245A0AC800A17041 /* Environment.swift in Sources */,
 				D0ABA10B244762B9008B5C88 /* ViewController.swift in Sources */,
 				D0ABA107244762B9008B5C88 /* AppDelegate.swift in Sources */,
+				D0E23B062458A2DB0084CA99 /* Person.swift in Sources */,
 				D0ABA109244762B9008B5C88 /* SceneDelegate.swift in Sources */,
+				D0E23B082458A68F0084CA99 /* Interest.swift in Sources */,
+				D0EDA7ED2459F84100A17041 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +409,7 @@
 		};
 		D0ABA118244762BB008B5C88 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A1359A008161423CB53D59F3 /* Pods-CuriousKatie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -334,6 +428,7 @@
 		};
 		D0ABA119244762BB008B5C88 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5BDCF04E18E53CF77C98007 /* Pods-CuriousKatie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
