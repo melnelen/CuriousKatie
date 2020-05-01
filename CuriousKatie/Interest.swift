@@ -6,8 +6,6 @@
 //  Copyright © 2020 Alex Ivanova. All rights reserved.
 //
 
-import Foundation
-
 class Interest {
     let name: String
     let category: Category
