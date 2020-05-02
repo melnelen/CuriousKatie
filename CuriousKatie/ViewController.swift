@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// Creates a list of random people
+        /// Creates a list of random people.
         let listOfPeople = Helper.pickSomePeople()
         
         /// Participants introduce themselves
@@ -21,8 +21,10 @@ class ViewController: UIViewController {
             print(person.introduceMyself())
         }
         
+        /// Print a new line to separate sections.
         print("\n")
         
+        /// All participants share all of their interests.
         for person in listOfPeople {
             print(person.shareMyInterests())
         }
