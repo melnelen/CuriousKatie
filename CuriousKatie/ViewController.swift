@@ -20,5 +20,11 @@ class ViewController: UIViewController {
         for person in listOfPeople {
             print(person.introduceMyself())
         }
+        
+        print("\n")
+        
+        for person in listOfPeople {
+            print(person.shareMyInterests())
+        }
     }
 }

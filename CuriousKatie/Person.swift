@@ -31,4 +31,24 @@ class Person {
     func introduceMyself() -> String {
         return "Hello, my name is \(self.name). I'm a \(self.age) years old \(self.sex) and I live in \(self.location)."
     }
+    
+    func shareMyInterests() -> String {
+        var interestsConfession = "\(self.name): I'm interested in "
+        
+        for (index, interest) in self.interests.enumerated() {
+            if interests.count == 1 {
+                interestsConfession += "\(interest.name)."
+            } else {
+                switch index {
+                case (interests.endIndex - 1):
+                    interestsConfession += " and \(interest.name)."
+                case (interests.endIndex - 2):
+                    interestsConfession += "\(interest.name)"
+                default:
+                    interestsConfession += "\(interest.name), "
+                }
+            }
+        }
+        return interestsConfession
+    }
 }
