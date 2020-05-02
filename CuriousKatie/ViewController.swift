@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        /// Creates a list of random people
+        let listOfPeople = Helper.pickSomePeople()
+        
+        /// Participants introduce themselves
+        for person in listOfPeople {
+            print(person.introduceMyself())
+        }
     }
-
 }

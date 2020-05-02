@@ -18,11 +18,17 @@ class Person {
     
     let faker = Faker(locale: "en")
     
+    /// Initialize a Person object with some fake data
     init() {
         self.name = faker.name.name()
         self.age = Int.random(in: 10...100)
-        self.sex = faker.gender.type()
-        self.location = faker.address.city()
+        self.sex = String.lowercased(faker.gender.type())()
+        self.location = "\(faker.address.city()), \(faker.address.country())"
         self.interests = Helper.pickSomeInterests()
+    }
+    
+    /// Creates an introduction message
+    func introduceMyself() -> String {
+        return "Hello, my name is \(self.name). I'm a \(self.age) years old \(self.sex) and I live in \(self.location)."
     }
 }

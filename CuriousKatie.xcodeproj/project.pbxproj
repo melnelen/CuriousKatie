@@ -97,15 +97,15 @@
 			children = (
 				D0EDA7F5245B2F4400A17041 /* Helper */,
 				D0EDA7E92459F0B500A17041 /* Resources */,
+				D0E23B052458A2DB0084CA99 /* Person.swift */,
+				D0E23B072458A68F0084CA99 /* Interest.swift */,
+				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
 				D0ABA106244762B9008B5C88 /* AppDelegate.swift */,
 				D0ABA108244762B9008B5C88 /* SceneDelegate.swift */,
-				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
 				D0ABA10C244762B9008B5C88 /* Main.storyboard */,
 				D0ABA10F244762BB008B5C88 /* Assets.xcassets */,
 				D0ABA111244762BB008B5C88 /* LaunchScreen.storyboard */,
 				D0ABA114244762BB008B5C88 /* Info.plist */,
-				D0E23B052458A2DB0084CA99 /* Person.swift */,
-				D0E23B072458A68F0084CA99 /* Interest.swift */,
 			);
 			path = CuriousKatie;
 			sourceTree = "<group>";
