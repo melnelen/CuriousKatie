@@ -9,6 +9,11 @@
 import Foundation
 
 struct Helper {
+    
+    static let maximumNumberOfInterestsPerPerson = 10
+    static let minimumNumberOfParticipants = 2
+    static let maximumNumberOfParticipants = 12
+    
     /// Generate all the interests
     static func generateAllInterests() -> [Interest] {
         
@@ -87,10 +92,54 @@ struct Helper {
                 interest36]
     }
     
-    /// Shuffle interests and pick a random amount between 1 and 10
-    static func pickSomeInterests() -> [Interest] {
-        let pool = generateAllInterests().shuffled()
-        return Array(pool.prefix(Int.random(in: 1...10)))
+    /// Generate all the people
+    static func generateAllPeople() -> [Person] {
+        let person01 = Person()
+        let person02 = Person()
+        let person03 = Person()
+        let person04 = Person()
+        let person05 = Person()
+        let person06 = Person()
+        let person07 = Person()
+        let person08 = Person()
+        let person09 = Person()
+        let person10 = Person()
+        let person11 = Person()
+        let person12 = Person()
+        
+        return [person01,
+                person02,
+                person03,
+                person04,
+                person05,
+                person06,
+                person07,
+                person08,
+                person09,
+                person10,
+                person11,
+                person12]
     }
     
+    /// Shuffle interests and pick a random amount between 1 and the maximum number of interests per person
+    /// *Note: in case the number of interests is smaller than maximum number of interests per person return at least the available;e number of interests
+    static func pickSomeInterests() -> [Interest] {
+        let pool = generateAllInterests().shuffled()
+        if pool.count >= maximumNumberOfInterestsPerPerson {
+            return Array(pool.prefix(Int.random(in: 1...maximumNumberOfInterestsPerPerson)))
+        } else {
+            return Array(pool.prefix(Int.random(in: 1...pool.count)))
+        }
+    }
+    
+    /// Shuffle people and pick a random amount between the minimum number of participants and the maximum number of participants
+    /// *Note: in case the number of people is smaller than maximum number of participants return at least the available;e number of participants
+    static func pickSomePeople() -> [Person] {
+        let pool = generateAllPeople().shuffled()
+        if pool.count >= maximumNumberOfParticipants {
+            return Array(pool.prefix(Int.random(in: minimumNumberOfParticipants...maximumNumberOfParticipants)))
+        } else {
+            return Array(pool.prefix(Int.random(in: minimumNumberOfParticipants...pool.count)))
+        }
+    }
 }
