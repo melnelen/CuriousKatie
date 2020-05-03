@@ -14,10 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         /// Creates a list of random people.
-        let listOfPeople = Helper.pickSomePeople()
+        let listOfParticipants = Helper.pickSomePeople()
         
         /// Participants introduce themselves
-        for person in listOfPeople {
+        for person in listOfParticipants {
             print(person.introduceMyself())
         }
         
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         print("\n")
         
         /// All participants share all of their interests.
-        for person in listOfPeople {
+        for person in listOfParticipants {
             print(person.shareMyInterests())
         }
     }
