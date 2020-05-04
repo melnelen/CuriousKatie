@@ -7,6 +7,7 @@
 //
 
 enum Environment {
+    case anywhere
     case indoor
     case outdoor
 }

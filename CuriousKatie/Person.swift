@@ -6,25 +6,52 @@
 //  Copyright © 2020 Alex Ivanova. All rights reserved.
 //
 
-import Foundation
 import Fakery
 
 class Person {
-    
-    let name: String
+    /// Properties of the Person object.
+    var name: String
     let age: Int
     let sex: String
     let location: String
-    let interest: [Interest]
+    let interests: [Interest]
     
+    /// Creating a Faker instance to help with creating some fake data.
     let faker = Faker(locale: "en")
     
-    init(name: String, age: Int, sex: String, location: String, interest: [Interest]) {
+    /// Initialize an instance of a Person object with some fake data.
+    init() {
         self.name = faker.name.name()
         self.age = Int.random(in: 10...100)
-        self.sex = faker.gender.type()
-        self.location = faker.address.city()
-        self.interest = interest
+        self.sex = String.lowercased(faker.gender.type())()
+        self.location = "\(faker.address.city()), \(faker.address.country())"
+        self.interests = Helper.pickSomeInterests()
     }
     
+    /// Creates an introduction message.
+    func introduceMyself() -> String {
+        return "Hello, my name is \(self.name). I'm a \(self.age) years old \(self.sex) and I live in \(self.location)."
+    }
+    
+    /// Have a person share all of their interests.
+    func shareMyInterests() -> String {
+        var interestsConfession = "\(self.name): I'm interested in "
+        
+        /// Iterate through all of the person's interests and add them to their confession one by one.
+        for (index, interest) in self.interests.enumerated() {
+            if interests.count == 1 {
+                interestsConfession += "\(interest.name)."
+            } else {
+                switch index {
+                case (interests.endIndex - 1):
+                    interestsConfession += " and \(interest.name)."
+                case (interests.endIndex - 2):
+                    interestsConfession += "\(interest.name)"
+                default:
+                    interestsConfession += "\(interest.name), "
+                }
+            }
+        }
+        return interestsConfession
+    }
 }

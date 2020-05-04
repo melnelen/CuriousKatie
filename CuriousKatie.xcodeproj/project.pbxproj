@@ -20,6 +20,7 @@
 		D0EDA7ED2459F84100A17041 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7EC2459F84100A17041 /* Category.swift */; };
 		D0EDA7F12459FF9B00A17041 /* Gear.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7F02459FF9B00A17041 /* Gear.swift */; };
 		D0EDA7F3245A0AC800A17041 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7F2245A0AC800A17041 /* Environment.swift */; };
+		D0EDA7F7245B2F7600A17041 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EDA7F6245B2F7600A17041 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D0EDA7EC2459F84100A17041 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D0EDA7F02459FF9B00A17041 /* Gear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gear.swift; sourceTree = "<group>"; };
 		D0EDA7F2245A0AC800A17041 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		D0EDA7F6245B2F7600A17041 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		E5BDCF04E18E53CF77C98007 /* Pods-CuriousKatie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CuriousKatie.release.xcconfig"; path = "Target Support Files/Pods-CuriousKatie/Pods-CuriousKatie.release.xcconfig"; sourceTree = "<group>"; };
 		EDEF6D4707DC58750CE38C24 /* libPods-CuriousKatie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CuriousKatie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,16 +95,17 @@
 		D0ABA105244762B9008B5C88 /* CuriousKatie */ = {
 			isa = PBXGroup;
 			children = (
+				D0EDA7F5245B2F4400A17041 /* Helper */,
 				D0EDA7E92459F0B500A17041 /* Resources */,
+				D0E23B052458A2DB0084CA99 /* Person.swift */,
+				D0E23B072458A68F0084CA99 /* Interest.swift */,
+				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
 				D0ABA106244762B9008B5C88 /* AppDelegate.swift */,
 				D0ABA108244762B9008B5C88 /* SceneDelegate.swift */,
-				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
 				D0ABA10C244762B9008B5C88 /* Main.storyboard */,
 				D0ABA10F244762BB008B5C88 /* Assets.xcassets */,
 				D0ABA111244762BB008B5C88 /* LaunchScreen.storyboard */,
 				D0ABA114244762BB008B5C88 /* Info.plist */,
-				D0E23B052458A2DB0084CA99 /* Person.swift */,
-				D0E23B072458A68F0084CA99 /* Interest.swift */,
 			);
 			path = CuriousKatie;
 			sourceTree = "<group>";
@@ -123,6 +126,14 @@
 				D0EDA7F2245A0AC800A17041 /* Environment.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D0EDA7F5245B2F4400A17041 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				D0EDA7F6245B2F7600A17041 /* Helper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +276,7 @@
 				D0ABA10B244762B9008B5C88 /* ViewController.swift in Sources */,
 				D0ABA107244762B9008B5C88 /* AppDelegate.swift in Sources */,
 				D0E23B062458A2DB0084CA99 /* Person.swift in Sources */,
+				D0EDA7F7245B2F7600A17041 /* Helper.swift in Sources */,
 				D0ABA109244762B9008B5C88 /* SceneDelegate.swift in Sources */,
 				D0E23B082458A68F0084CA99 /* Interest.swift in Sources */,
 				D0EDA7ED2459F84100A17041 /* Category.swift in Sources */,

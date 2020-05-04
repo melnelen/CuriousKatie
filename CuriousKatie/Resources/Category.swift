@@ -8,7 +8,7 @@
 
 enum Category {
     case art
-    case sport
     case science
     case social
+    case sport
 }
