@@ -29,15 +29,19 @@ class ViewController: UIViewController {
             print(person.shareAllInterests())
         }
         
+        /// Print a new line to separate sections.
+        print("\n")
+        
         /// Each participant shares one of their interests at a time.
         var participantsWithInterests = participants.shuffled()
         while participantsWithInterests.count != 0 {
             participantsWithInterests = participantsWithInterests.shuffled()
-            for person in participantsWithInterests {
-                if person.hasSomethingToShare {
-                    print(person.shareNextInterest())
+            for (index, person) in participantsWithInterests.enumerated() {
+                if let somethingToShare = person.shareNextInterest() {
+                    print(somethingToShare)
                 } else {
-                    participantsWithInterests.remove(at: 0)
+                    participantsWithInterests.remove(at: index)
+                    break
                 }
             }
         }

@@ -15,7 +15,7 @@ class Person {
     let sex: String
     let location: String
     let interests: [Interest]
-    let hasSomethingToShare = true
+    var sharedInterests: [Interest] = []
     
     /// Creating a Faker instance to help with creating some fake data.
     let faker = Faker(locale: "en")
@@ -56,9 +56,16 @@ class Person {
         return interestsConfession
     }
     
-    
     /// Share one of the person's interests that hasn't been shared yet
-    func shareNextInterest() -> String {
-        return ""
+    /// Note: We are sure that the person has at least one interest
+    func shareNextInterest() -> String? {
+        var interestConfession = "\(self.name): I'm interested in "
+        if sharedInterests.count != interests.count {
+            interestConfession += "\((self.interests[sharedInterests.count]).name)."
+            sharedInterests.append(self.interests[sharedInterests.count])
+            return interestConfession
+        } else {
+            return nil
+        }
     }
 }
