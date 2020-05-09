@@ -61,7 +61,22 @@ class Person {
     func shareNextInterest() -> String? {
         var interestConfession = "\(self.name): I'm interested in "
         if sharedInterests.count != interests.count {
-            interestConfession += "\((self.interests[sharedInterests.count]).name)."
+            interestConfession += "\((self.interests[sharedInterests.count]).name). It is a \((self.interests[sharedInterests.count]).category) activity. It can be performed \((self.interests[sharedInterests.count]).environment) and it requires "
+            for (index, gearItem) in self.interests[sharedInterests.count].gear.enumerated() {
+                if self.interests[sharedInterests.count].gear.count == 1 {
+                    interestConfession += "\(gearItem.rawValue) "
+                } else {
+                    switch index {
+                    case (self.interests[sharedInterests.count].gear.endIndex - 1):
+                        interestConfession += " and \(gearItem.rawValue) "
+                    case (self.interests[sharedInterests.count].gear.endIndex - 2):
+                        interestConfession += "\(gearItem.rawValue)"
+                    default:
+                        interestConfession += "\(gearItem.rawValue), "
+                    }
+                }
+            }
+            interestConfession += "to be practiced."
             sharedInterests.append(self.interests[sharedInterests.count])
             return interestConfession
         } else {
