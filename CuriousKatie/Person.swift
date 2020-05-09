@@ -15,6 +15,7 @@ class Person {
     let sex: String
     let location: String
     let interests: [Interest]
+    let hasSomethingToShare = true
     
     /// Creating a Faker instance to help with creating some fake data.
     let faker = Faker(locale: "en")
@@ -34,7 +35,7 @@ class Person {
     }
     
     /// Have a person share all of their interests.
-    func shareMyInterests() -> String {
+    func shareAllInterests() -> String {
         var interestsConfession = "\(self.name): I'm interested in "
         
         /// Iterate through all of the person's interests and add them to their confession one by one.
@@ -53,5 +54,11 @@ class Person {
             }
         }
         return interestsConfession
+    }
+    
+    
+    /// Share one of the person's interests that hasn't been shared yet
+    func shareNextInterest() -> String {
+        return ""
     }
 }
