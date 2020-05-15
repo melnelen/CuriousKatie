@@ -72,30 +72,9 @@ class Person: Equatable {
         let nextInterest = self.interests[sharedInterests.count]
         var interestConfession = "\(self.name): I'm interested in "
         interestConfession += "\(nextInterest.name). It is a \(nextInterest.category) activity. It can be performed \(nextInterest.environment) and it requires "
-        interestConfession += shareGearRequired(for: nextInterest)
+        interestConfession += Interest.shareGearRequired(for: nextInterest)
         interestConfession += "to be practiced."
         sharedInterests.append(nextInterest)
         return interestConfession
-    }
-    
-    /// Share a list of gear required for this interest
-    /// - Parameter interest: an instance of Interest
-    func shareGearRequired(for interest: Interest) -> String {
-        var gearRequired = ""
-        for (index, gearItem) in interest.gear.enumerated() {
-            if interest.gear.count == 1 {
-                gearRequired += "\(gearItem.rawValue) "
-            } else {
-                switch index {
-                case (interest.gear.endIndex - 1):
-                    gearRequired += " and \(gearItem.rawValue) "
-                case (interest.gear.endIndex - 2):
-                    gearRequired += "\(gearItem.rawValue)"
-                default:
-                    gearRequired += "\(gearItem.rawValue), "
-                }
-            }
-        }
-        return gearRequired
     }
 }
