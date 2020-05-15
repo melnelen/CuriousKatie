@@ -70,11 +70,9 @@ class Person: Equatable {
             return nil
         }
         let nextInterest = self.interests[sharedInterests.count]
-        var interestConfession = "\(self.name): I'm interested in "
-        interestConfession += "\(nextInterest.name). It is a \(nextInterest.category) activity. It can be performed \(nextInterest.environment) and it requires "
-        interestConfession += Interest.shareGearRequired(for: nextInterest)
-        interestConfession += "to be practiced."
+        var nextInterestConfession = "\(self.name): I'm interested in "
+        nextInterestConfession += Interest.share(nextInterest)
         sharedInterests.append(nextInterest)
-        return interestConfession
+        return nextInterestConfession
     }
 }

@@ -21,6 +21,16 @@ class Interest {
         self.environment = environment
     }
     
+    /// Share this interest
+    /// - Parameter interest: an instance of Interest
+    static func share(_ interest: Interest) -> String {
+        var interestConfession = ""
+        interestConfession += "\(interest.name). It is a \(interest.category) activity. It can be performed \(interest.environment) and it requires "
+        interestConfession += shareGearRequired(for: interest)
+        interestConfession += "to be practiced."
+        return interestConfession
+    }
+    
     /// Share a list of gear required for this interest
     /// - Parameter interest: an instance of Interest
     static func shareGearRequired(for interest: Interest) -> String {
