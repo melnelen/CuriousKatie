@@ -29,6 +29,9 @@ class Person: Equatable {
         self.interests = Helper.pickSomeInterests()
     }
     
+    /// Compare two people by using their unique names
+    /// - Parameter lhs: compare this Person
+    /// - Parameter rhs: to this Person
     static func == (lhs: Person, rhs: Person) -> Bool {
         return lhs.name == rhs.name
     }
@@ -63,28 +66,36 @@ class Person: Equatable {
     /// Share one of the person's interests that hasn't been shared yet
     /// Note: We are sure that the person has at least one interest
     func shareNextInterest() -> String? {
-        
-        var interestConfession = "\(self.name): I'm interested in "
         guard sharedInterests.count != interests.count else {
             return nil
         }
-        interestConfession += "\((self.interests[sharedInterests.count]).name). It is a \((self.interests[sharedInterests.count]).category) activity. It can be performed \((self.interests[sharedInterests.count]).environment) and it requires "
-        for (index, gearItem) in self.interests[sharedInterests.count].gear.enumerated() {
-            if self.interests[sharedInterests.count].gear.count == 1 {
-                interestConfession += "\(gearItem.rawValue) "
+        let nextInterest = self.interests[sharedInterests.count]
+        var interestConfession = "\(self.name): I'm interested in "
+        interestConfession += "\(nextInterest.name). It is a \(nextInterest.category) activity. It can be performed \(nextInterest.environment) and it requires "
+        interestConfession += shareGearRequired(for: nextInterest)
+        interestConfession += "to be practiced."
+        sharedInterests.append(nextInterest)
+        return interestConfession
+    }
+    
+    /// Share a list of gear required for this interest
+    /// - Parameter interest: an instance of Interest
+    func shareGearRequired(for interest: Interest) -> String {
+        var gearRequired = ""
+        for (index, gearItem) in interest.gear.enumerated() {
+            if interest.gear.count == 1 {
+                gearRequired += "\(gearItem.rawValue) "
             } else {
                 switch index {
-                case (self.interests[sharedInterests.count].gear.endIndex - 1):
-                    interestConfession += " and \(gearItem.rawValue) "
-                case (self.interests[sharedInterests.count].gear.endIndex - 2):
-                    interestConfession += "\(gearItem.rawValue)"
+                case (interest.gear.endIndex - 1):
+                    gearRequired += " and \(gearItem.rawValue) "
+                case (interest.gear.endIndex - 2):
+                    gearRequired += "\(gearItem.rawValue)"
                 default:
-                    interestConfession += "\(gearItem.rawValue), "
+                    gearRequired += "\(gearItem.rawValue), "
                 }
             }
         }
-        interestConfession += "to be practiced."
-        sharedInterests.append(self.interests[sharedInterests.count])
-        return interestConfession
+        return gearRequired
     }
 }
