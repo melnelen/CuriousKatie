@@ -36,9 +36,9 @@ class ViewController: UIViewController {
         var participantsWithInterests = participants
         while participantsWithInterests.count != 0 {
             participantsWithInterests = participantsWithInterests.shuffled()
-            for (index, person) in participantsWithInterests.enumerated() {
+            for person in participantsWithInterests {
                 guard let somethingToShare = person.shareNextInterest() else {
-                    participantsWithInterests.remove(at: index)
+                    participantsWithInterests.removeAll { $0.name == person.name }
                     break
                 }
                 print(somethingToShare)

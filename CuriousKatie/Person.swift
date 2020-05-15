@@ -8,7 +8,7 @@
 
 import Fakery
 
-class Person {
+class Person: Equatable {
     /// Properties of the Person object.
     var name: String
     let age: Int
@@ -27,6 +27,10 @@ class Person {
         self.sex = String.lowercased(faker.gender.type())()
         self.location = "\(faker.address.city()), \(faker.address.country())"
         self.interests = Helper.pickSomeInterests()
+    }
+    
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.name == rhs.name
     }
     
     /// Creates an introduction message.
