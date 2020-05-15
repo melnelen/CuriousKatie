@@ -8,13 +8,14 @@
 
 import Fakery
 
-class Person {
+class Person: Equatable {
     /// Properties of the Person object.
     var name: String
     let age: Int
     let sex: String
     let location: String
     let interests: [Interest]
+    var sharedInterests: [Interest] = []
     
     /// Creating a Faker instance to help with creating some fake data.
     let faker = Faker(locale: "en")
@@ -28,13 +29,20 @@ class Person {
         self.interests = Helper.pickSomeInterests()
     }
     
+    /// Compare two people by using their unique names
+    /// - Parameter lhs: compare this Person
+    /// - Parameter rhs: to this Person
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
     /// Creates an introduction message.
     func introduceMyself() -> String {
         return "Hello, my name is \(self.name). I'm a \(self.age) years old \(self.sex) and I live in \(self.location)."
     }
     
     /// Have a person share all of their interests.
-    func shareMyInterests() -> String {
+    func shareAllInterests() -> String {
         var interestsConfession = "\(self.name): I'm interested in "
         
         /// Iterate through all of the person's interests and add them to their confession one by one.
@@ -43,9 +51,9 @@ class Person {
                 interestsConfession += "\(interest.name)."
             } else {
                 switch index {
-                case (interests.endIndex - 1):
+                case (self.interests.endIndex - 1):
                     interestsConfession += " and \(interest.name)."
-                case (interests.endIndex - 2):
+                case (self.interests.endIndex - 2):
                     interestsConfession += "\(interest.name)"
                 default:
                     interestsConfession += "\(interest.name), "
@@ -53,5 +61,18 @@ class Person {
             }
         }
         return interestsConfession
+    }
+    
+    /// Share one of the person's interests that hasn't been shared yet
+    /// Note: We are sure that the person has at least one interest
+    func shareNextInterest() -> String? {
+        guard sharedInterests.count != interests.count else {
+            return nil
+        }
+        let nextInterest = self.interests[sharedInterests.count]
+        var nextInterestConfession = "\(self.name): I'm interested in "
+        nextInterestConfession += Interest.share(nextInterest)
+        sharedInterests.append(nextInterest)
+        return nextInterestConfession
     }
 }
