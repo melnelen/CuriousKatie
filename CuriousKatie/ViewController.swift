@@ -71,6 +71,10 @@ class ViewController: UIViewController {
                         oldMatchingScore = matchingScore
                     }
                 }
+                guard matchingScore != 0 else {
+                    print("\(seeker.name) and \(matchingPartner.name) are not a good match.")
+                    break
+                }
                 print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(matchingScore)/20.")
                 seekingParticipants.removeAll { $0.name == seeker.name }
                 seekingParticipants.removeAll { $0.name == matchingPartner.name }
