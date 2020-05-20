@@ -59,29 +59,23 @@ class ViewController: UIViewController {
             }
             var matchingScore = 0
             var oldMatchingScore = 0
-            var seeker = seekingParticipants[0]
+            let seeker = seekingParticipants[0]
             var matchingPartner = seekingParticipants[1]
-            for index in 0..<seekingParticipants.count - 1 {
-                seeker = seekingParticipants[index]
-                for index in 1..<seekingParticipants.count {
-                    let potentialPartner = seekingParticipants[index]
-                    matchingScore = Helper.calculateMatchingScore(between: seeker, and: potentialPartner)
-                    if oldMatchingScore < matchingScore {
-                        matchingPartner = potentialPartner
-                        oldMatchingScore = matchingScore
-                    }
+            for index in 1..<seekingParticipants.count {
+                let potentialPartner = seekingParticipants[index]
+                matchingScore = Match.calculateMatchingScore(between: seeker, and: potentialPartner)
+                if oldMatchingScore < matchingScore {
+                    matchingPartner = potentialPartner
+                    oldMatchingScore = matchingScore
                 }
-                guard matchingScore != 0 else {
-                    print("\(seeker.name) and \(matchingPartner.name) are not a good match.")
-                    seekingParticipants.removeAll { $0.name == seeker.name }
-                    seekingParticipants.removeAll { $0.name == matchingPartner.name }
-                    break
-                }
-                print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(matchingScore)/20.")
-                seekingParticipants.removeAll { $0.name == seeker.name }
-                seekingParticipants.removeAll { $0.name == matchingPartner.name }
-                break
             }
+            if matchingScore == 0 {
+                print("\(seeker.name) and \(matchingPartner.name) are not a good match.")
+            } else {
+            print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(oldMatchingScore)/20.")
+            }
+            seekingParticipants.removeAll { $0.name == seeker.name }
+            seekingParticipants.removeAll { $0.name == matchingPartner.name }
         }
     }
 }
