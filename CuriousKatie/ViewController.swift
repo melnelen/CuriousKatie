@@ -44,5 +44,38 @@ class ViewController: UIViewController {
                 print(somethingToShare)
             }
         }
+        
+        /// Print a new line to separate sections.
+        print("\n")
+        
+        /// Creating matching pairs of people
+        var seekingParticipants = participants
+        while seekingParticipants.count != 0 {
+            guard seekingParticipants.count != 1 else {
+                let lonelyParticipant = seekingParticipants[0]
+                print("\(lonelyParticipant.name) has no partner.")
+                seekingParticipants.removeAll { $0.name == lonelyParticipant.name }
+                break
+            }
+            var matchingScore = 0
+            var oldMatchingScore = 0
+            let seeker = seekingParticipants[0]
+            var matchingPartner = seekingParticipants[1]
+            for index in 1..<seekingParticipants.count {
+                let potentialPartner = seekingParticipants[index]
+                matchingScore = Match.calculateMatchingScore(between: seeker, and: potentialPartner)
+                if oldMatchingScore < matchingScore {
+                    matchingPartner = potentialPartner
+                    oldMatchingScore = matchingScore
+                }
+            }
+            if matchingScore == 0 {
+                print("\(seeker.name) and \(matchingPartner.name) are not a good match.")
+            } else {
+            print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(oldMatchingScore)/20.")
+            }
+            seekingParticipants.removeAll { $0.name == seeker.name }
+            seekingParticipants.removeAll { $0.name == matchingPartner.name }
+        }
     }
 }

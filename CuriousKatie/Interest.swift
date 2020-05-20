@@ -6,7 +6,7 @@
 //  Copyright © 2020 Alex Ivanova. All rights reserved.
 //
 
-class Interest {
+class Interest: Equatable {
     /// Properties of the Interest object.
     let name: String
     let category: Category
@@ -19,6 +19,13 @@ class Interest {
         self.category = category
         self.gear = gear
         self.environment = environment
+    }
+    
+    /// Compare two interests by using their unique names
+    /// - Parameter lhs: compare this Interest
+    /// - Parameter rhs: to this Interest
+    static func == (lhs: Interest, rhs: Interest) -> Bool {
+        return lhs.name == rhs.name
     }
     
     /// Share this interest
