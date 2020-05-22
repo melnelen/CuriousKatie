@@ -99,9 +99,6 @@
 			children = (
 				D0EDA7F5245B2F4400A17041 /* Helper */,
 				D0EDA7E92459F0B500A17041 /* Resources */,
-				D0E23B052458A2DB0084CA99 /* Person.swift */,
-				D0E23B072458A68F0084CA99 /* Interest.swift */,
-				D06642AD247557A3009F12CC /* Match.swift */,
 				D0ABA10A244762B9008B5C88 /* ViewController.swift */,
 				D0ABA106244762B9008B5C88 /* AppDelegate.swift */,
 				D0ABA108244762B9008B5C88 /* SceneDelegate.swift */,
@@ -127,6 +124,9 @@
 				D0EDA7EC2459F84100A17041 /* Category.swift */,
 				D0EDA7F02459FF9B00A17041 /* Gear.swift */,
 				D0EDA7F2245A0AC800A17041 /* Environment.swift */,
+				D0E23B052458A2DB0084CA99 /* Person.swift */,
+				D0E23B072458A68F0084CA99 /* Interest.swift */,
+				D06642AD247557A3009F12CC /* Match.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

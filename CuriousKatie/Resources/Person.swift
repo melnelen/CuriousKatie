@@ -23,7 +23,7 @@ class Person: Equatable {
     /// Initialize an instance of a Person object with some fake data.
     init() {
         self.name = faker.name.name()
-        self.age = Int.random(in: 10...100)
+        self.age = Int.random(in: 18...65)
         self.sex = String.lowercased(faker.gender.type())()
         self.location = "\(faker.address.city()), \(faker.address.country())"
         self.interests = Helper.pickSomeInterests()
