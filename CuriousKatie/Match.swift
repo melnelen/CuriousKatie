@@ -9,12 +9,22 @@
 import Foundation
 
 class Match {
+    let seeker: Person
+    let partner: Person
+    let score: Int
+    
+    init(seeker: Person, partner: Person) {
+        self.seeker = seeker
+        self.partner = partner
+        self.score = Match.calculateScore(between: seeker, and: partner)
+    }
+    
     /// Calculating the matching score between two people by counting the number of different interests that they have
     /// - Parameter seeker: the Person seeking for a partner
-    /// - Parameter potentialPartner: the potential partner Person
-    static func calculateMatchingScore(between seeker: Person, and potentialPartner: Person) -> Int {
+    /// - Parameter partner: the potential partner Person
+    private static func calculateScore(between seeker: Person, and partner: Person) -> Int {
         let seekersInterests = seeker.interests.map { $0.name }
-        let potentialPartnersInterests = potentialPartner.interests.map { $0.name }
+        let potentialPartnersInterests = partner.interests.map { $0.name }
         let differentInterests = seekersInterests.difference(from: potentialPartnersInterests)
         return differentInterests.count
     }

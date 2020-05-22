@@ -63,7 +63,7 @@ class ViewController: UIViewController {
             var matchingPartner = seekingParticipants[1]
             for index in 1..<seekingParticipants.count {
                 let potentialPartner = seekingParticipants[index]
-                matchingScore = Match.calculateMatchingScore(between: seeker, and: potentialPartner)
+                matchingScore = Match(seeker: seeker, partner: potentialPartner).score
                 if oldMatchingScore < matchingScore {
                     matchingPartner = potentialPartner
                     oldMatchingScore = matchingScore
