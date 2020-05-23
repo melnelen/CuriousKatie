@@ -28,4 +28,27 @@ class Match {
         let differentInterests = seekersInterests.difference(from: partnersInterests)
         return differentInterests.count
     }
+    
+    /// Calculating the best score of all possible pairs combinations
+    func calculateBestPairsScore(from participants: [Person]) -> Int {
+        var maxScore = 0
+        for iterations in 0..<participants.count {
+            var oldScore = 0
+            var seekingParticipants = participants
+            var seeker = seekingParticipants[iterations]
+            while seekingParticipants.count != 0 && seekingParticipants.count != 1 {
+                if seekingParticipants.count < iterations {
+                    seeker = seekingParticipants[0]
+                }
+                let partner = seekingParticipants[seekingParticipants.count - 1]
+                oldScore += Match.calculateScore(between: seeker, and: partner)
+                seekingParticipants.removeAll { $0.name == seeker.name }
+                seekingParticipants.removeAll { $0.name == partner.name }
+            }
+            if maxScore < oldScore {
+                maxScore = oldScore
+            }
+        }
+        return maxScore
+    }
 }

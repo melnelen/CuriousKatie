@@ -80,26 +80,5 @@ class ViewController: UIViewController {
         
         /// Print a new line to separate sections.
         print("\n")
-        
-        /// Calculating the best score of all possible pairs combinations
-        var maxScore = 0
-        for iterations in 0..<participants.count {
-            var oldScore = 0
-            var seekingParticipants2 = participants
-            var seeker = seekingParticipants2[iterations]
-            while seekingParticipants2.count != 0 && seekingParticipants2.count != 1 {
-                if seekingParticipants2.count < iterations {
-                    seeker = seekingParticipants2[0]
-                }
-                let partner = seekingParticipants2[seekingParticipants2.count - 1]
-                oldScore += Match(seeker: seeker, partner: partner).score
-                seekingParticipants2.removeAll { $0.name == seeker.name }
-                seekingParticipants2.removeAll { $0.name == partner.name }
-            }
-            if maxScore < oldScore {
-                maxScore = oldScore
-            }
-            print(maxScore)
-        }
     }
 }
