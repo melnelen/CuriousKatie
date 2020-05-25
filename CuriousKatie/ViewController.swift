@@ -80,5 +80,11 @@ class ViewController: UIViewController {
         
         /// Print a new line to separate sections.
         print("\n")
+        
+        /// Creating better matching pairs of people
+        let matches = Match.bestMatches(from: participants)
+        for match in matches {
+            print("\(match.seeker.name) and \(match.partner.name) are a good match with a matching score of \(match.score)/20.")
+        }
     }
 }

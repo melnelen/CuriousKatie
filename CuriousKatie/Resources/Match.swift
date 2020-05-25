@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Match {
+class Match: Equatable {
     let seeker: Person
     let partner: Person
     let score: Int
@@ -19,9 +19,17 @@ class Match {
         self.score = Match.calculateScore(between: seeker, and: partner)
     }
     
-    /// Calculating the matching score between two people by counting the number of different interests that they have
-    /// - Parameter seeker: the Person seeking for a partner
-    /// - Parameter partner: the potential partner Person
+    /// Compare two matches by using their unique seeker and partner matching pair.
+    /// - Parameter lhs: compare this Match
+    /// - Parameter rhs: to this Match
+    static func == (lhs: Match, rhs: Match) -> Bool {
+        return lhs.seeker == rhs.seeker && lhs.partner == rhs.partner
+    }
+    
+    /// Calculating the matching score between two people by counting the number of different interests that they have.
+    /// - Parameter seeker: Person seeking for a partner
+    /// - Parameter partner: Potential partner
+    /// - Returns: Matching score
     private static func calculateScore(between seeker: Person, and partner: Person) -> Int {
         let seekersInterests = seeker.interests.map { $0.name }
         let partnersInterests = partner.interests.map { $0.name }
@@ -29,26 +37,102 @@ class Match {
         return differentInterests.count
     }
     
-    /// Calculating the best score of all possible pairs combinations
-    func calculateBestPairsScore(from participants: [Person]) -> Int {
+    /// Finding the best matching pairs combination from an array of People.
+    /// The best pairs are determined by how high is the combined score of all the possible matches in the array of People.
+    /// The array with the highest combined score is the one with the best matches.
+    /// - Parameter participants: Array of People participating
+    /// - Returns: Best matching pairs
+    static func bestMatches(from participants: [Person]) -> [Match] {
         var maxScore = 0
-        for iterations in 0..<participants.count {
-            var oldScore = 0
-            var seekingParticipants = participants
-            var seeker = seekingParticipants[iterations]
-            while seekingParticipants.count != 0 && seekingParticipants.count != 1 {
-                if seekingParticipants.count < iterations {
-                    seeker = seekingParticipants[0]
-                }
-                let partner = seekingParticipants[seekingParticipants.count - 1]
-                oldScore += Match.calculateScore(between: seeker, and: partner)
-                seekingParticipants.removeAll { $0.name == seeker.name }
-                seekingParticipants.removeAll { $0.name == partner.name }
+        var bestPairs = [Match]()
+        let allPossiblePairs = Match.matchingPairs(from: Match.pairsCombinations(from: participants, taking: 2))
+        
+        for index in 0..<allPossiblePairs.count {
+            var pairsScore = 0
+            var iterations = index
+            var possiblePairs = [Match]()
+            var pairs = allPossiblePairs
+            
+            while pairs.count != 0 {
+                iterations = checkIndex(pairs.count, index)
+                let match = pairs[iterations]
+                possiblePairs.append(match)
+                pairs.removeAll { $0.seeker == match.seeker }
+                pairs.removeAll { $0.seeker == match.partner }
+                pairs.removeAll { $0.partner == match.partner }
+                pairs.removeAll { $0.partner == match.seeker }
             }
-            if maxScore < oldScore {
-                maxScore = oldScore
+            
+            pairsScore = Match.calculateMatchesScore(from: possiblePairs)
+            if maxScore < pairsScore {
+                maxScore = pairsScore
+                bestPairs = possiblePairs
             }
         }
-        return maxScore
+        
+        print("This group score is \(maxScore)/\(bestPairs.count * 20).")
+        return bestPairs
+    }
+    
+    /// Check if the index is out of the array.
+    /// - Parameter size: Array size
+    /// - Parameter index: Array index
+    /// - Returns: Either the index or in case the index is outside the array size - the last index
+    private static func checkIndex(_ size: Int, _ index: Int) -> Int {
+        var iterations = index
+        if size <= index {
+            iterations = size - 1
+        }
+        return iterations
+    }
+    
+    /// Calculating the score of a possible pairs combination.
+    /// - Parameter matches: Array of Matches
+    /// - Returns: Sum of the scores of all Matches
+    private static func calculateMatchesScore(from matches: [Match]) -> Int {
+        var score = 0
+        
+        for match in matches {
+            score += match.score
+        }
+        
+        return score
+    }
+    
+    /// Converting an array of arrays of pairs of people to matching pairs.
+    /// - Parameter pairs: Array of arrays of pairs
+    /// - Returns: Array of Matches
+    private static func matchingPairs(from pairs: [[Person]]) -> [Match] {
+        var matchingPairs = [Match]()
+        
+        for index in 0..<pairs.count {
+            let pair = pairs[index]
+            matchingPairs.append(Match(seeker: pair[0], partner: pair[1]))
+        }
+        
+        return matchingPairs
+    }
+    
+    /// Given an array of people and how many of them we are taking, returns an array with all possible pairs combinations.
+    /// - Parameter participants: Array of people to combine
+    /// - Parameter taking: Picking people count from array
+    /// - Returns: Returns combinations of participants pairs without repetition
+    private static func pairsCombinations<T>(from participants: [T], taking: Int) -> [[T]] {
+        guard participants.count >= taking else { return [] }
+        guard participants.count > 0 && taking > 0 else { return [[]] }
+        
+        if taking == 1 {
+            return participants.map {[$0]}
+        }
+        
+        var combinations = [[T]]()
+        
+        for (index, participant) in participants.enumerated() {
+            var reducedElements = participants
+            reducedElements.removeFirst(index + 1)
+            combinations += pairsCombinations(from: reducedElements, taking: taking - 1).map {[participant] + $0}
+        }
+        
+        return combinations
     }
 }
