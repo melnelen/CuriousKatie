@@ -44,22 +44,48 @@ class Match: Equatable {
     /// - Returns: Best matching pairs
     static func bestMatches(from participants: [Person]) -> [Match] {
         var maxScore = 0
-        var allMatchesScore = 0
         var bestMatches = [Match]()
         let allPossibleMatches = Match.possibleCombinations(participants, taking: 2)
                                 .map {pair in Match(seeker: pair[0], partner: pair[1])}
-        let allPossibleMatchesCombinations = Match.possibleCombinations(allPossibleMatches, taking: participants.count / 2)
+        
+        for index in 0..<allPossibleMatches.count {
+            var allMatchesScore = 0
+            var iterations = index
+            var possibleMatches = [Match]()
+            var matches = allPossibleMatches
 
-        for matchCombinations in allPossibleMatchesCombinations {
-            allMatchesScore = matchCombinations.reduce(0, {$0 + $1.score})
+            while matches.count != 0 {
+                iterations = checkIndex(matches, index)
+                let match = matches[iterations]
+                possibleMatches.append(match)
+                matches = matches.filter({$0.seeker != match.seeker
+                                    && $0.seeker != match.partner
+                                    && $0.partner != match.partner
+                                    && $0.partner != match.seeker})
+            }
+
+            allMatchesScore = possibleMatches.reduce(0, {$0 + $1.score})
             if maxScore < allMatchesScore {
                 maxScore = allMatchesScore
-                bestMatches = matchCombinations
+                bestMatches = possibleMatches
             }
         }
         
         print("This group has a matching score of \(maxScore)/\(bestMatches.count * 20).")
         return bestMatches
+    }
+    
+    /// Check if the index is out of the array.
+    /// - Parameter size: Array size
+    /// - Parameter index: Array index
+    /// - Returns: Either the index or in case the index is outside the array size - the last index
+    private static func checkIndex(_ matches: [Match], _ index: Int) -> Int {
+        var iterations = index
+        if matches.count <= index {
+            let bestMatchScore = matches.map {$0.score}.max()
+            iterations = matches.firstIndex(where: {$0.score == bestMatchScore})!
+        }
+        return iterations
     }
     
     /// Given an array of elements and how many of them we are taking, returns an array with all possible combinations
