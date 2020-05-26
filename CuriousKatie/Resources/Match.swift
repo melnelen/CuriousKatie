@@ -63,14 +63,14 @@ class Match: Equatable {
                 pairs.removeAll { $0.partner == match.seeker }
             }
             
-            pairsScore = Match.calculateMatchesScore(from: possiblePairs)
+            pairsScore = possiblePairs.reduce(0, {$0 + $1.score})
             if maxScore < pairsScore {
                 maxScore = pairsScore
                 bestPairs = possiblePairs
             }
         }
         
-        print("This group score is \(maxScore)/\(bestPairs.count * 20).")
+        print("This group has a matching score of \(maxScore)/\(bestPairs.count * 20).")
         return bestPairs
     }
     
@@ -84,19 +84,6 @@ class Match: Equatable {
             iterations = size - 1
         }
         return iterations
-    }
-    
-    /// Calculating the score of a possible pairs combination.
-    /// - Parameter matches: Array of Matches
-    /// - Returns: Sum of the scores of all Matches
-    private static func calculateMatchesScore(from matches: [Match]) -> Int {
-        var score = 0
-        
-        for match in matches {
-            score += match.score
-        }
-        
-        return score
     }
     
     /// Converting an array of arrays of pairs of people to matching pairs.
