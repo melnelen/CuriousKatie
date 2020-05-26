@@ -44,26 +44,36 @@ class Match: Equatable {
     /// - Returns: Best matching pairs
     static func bestMatches(from participants: [Person]) -> [Match] {
         var maxScore = 0
+//        var allMatchesScore = 0
         var bestMatches = [Match]()
-        let allPossibleMatches = Match.pairsCombinations(from: participants, taking: 2)
+        let allPossibleMatches = Match.possibleCombinations(participants, taking: 2)
                                 .map {pair in Match(seeker: pair[0], partner: pair[1])}
+//        let allPossibleMatchesCombinations = Match.possibleCombinations(allPossibleMatches, taking: participants.count / 2)
+//
+//        for matchCombinations in allPossibleMatchesCombinations {
+//            allMatchesScore = matchCombinations.reduce(0, {$0 + $1.score})
+//            if maxScore < allMatchesScore {
+//                maxScore = allMatchesScore
+//                bestMatches = matchCombinations
+//            }
+//        }
         
         for index in 0..<allPossibleMatches.count {
             var allMatchesScore = 0
             var iterations = index
             var possibleMatches = [Match]()
             var matches = allPossibleMatches
-            
+
             while matches.count != 0 {
-                iterations = checkIndex(matches.count, index)
+                iterations = checkIndex(matches, index)
                 let match = matches[iterations]
                 possibleMatches.append(match)
-                matches = matches.filter({ $0.seeker != match.seeker
+                matches = matches.filter({$0.seeker != match.seeker
                                     && $0.seeker != match.partner
                                     && $0.partner != match.partner
                                     && $0.partner != match.seeker})
             }
-            
+
             allMatchesScore = possibleMatches.reduce(0, {$0 + $1.score})
             if maxScore < allMatchesScore {
                 maxScore = allMatchesScore
@@ -79,10 +89,11 @@ class Match: Equatable {
     /// - Parameter size: Array size
     /// - Parameter index: Array index
     /// - Returns: Either the index or in case the index is outside the array size - the last index
-    private static func checkIndex(_ size: Int, _ index: Int) -> Int {
+    private static func checkIndex(_ matches: [Match], _ index: Int) -> Int {
         var iterations = index
-        if size <= index {
-            iterations = size - 1
+        if matches.count <= index {
+            let bestMatchScore = matches.map {$0.score}.max()
+            iterations = matches.firstIndex(where: {$0.score == bestMatchScore})!
         }
         return iterations
     }
@@ -91,20 +102,19 @@ class Match: Equatable {
     /// - Parameter participants: Array of people to combine
     /// - Parameter taking: Picking people count from array
     /// - Returns: Returns combinations of participants pairs without repetition
-    private static func pairsCombinations(from participants: [Person], taking: Int) -> [[Person]] {
-        guard participants.count >= taking else { return [] }
-        guard participants.count > 0 && taking > 0 else { return [[]] }
+    public static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
+        guard elements.count >= taking else { return [] }
+        guard elements.count > 0 && taking > 0 else { return [[]] }
         
         if taking == 1 {
-            return participants.map {[$0]}
+            return elements.map {[$0]}
         }
         
-        var combinations = [[Person]]()
-        
-        for (index, participant) in participants.enumerated() {
-            var reducedElements = participants
+        var combinations = [[T]]()
+        for (index, element) in elements.enumerated() {
+            var reducedElements = elements
             reducedElements.removeFirst(index + 1)
-            combinations += pairsCombinations(from: reducedElements, taking: taking - 1).map {[participant] + $0}
+            combinations += possibleCombinations(reducedElements, taking: taking - 1).map {[element] + $0}
         }
         
         return combinations

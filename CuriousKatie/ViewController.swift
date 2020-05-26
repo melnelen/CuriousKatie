@@ -50,6 +50,7 @@ class ViewController: UIViewController {
         
         /// Creating matching pairs of people
         var seekingParticipants = participants
+        var sumScore = 0
         while seekingParticipants.count != 0 {
             guard seekingParticipants.count != 1 else {
                 let lonelyParticipant = seekingParticipants[0]
@@ -58,25 +59,27 @@ class ViewController: UIViewController {
                 break
             }
             var matchingScore = 0
-            var oldMatchingScore = 0
+            var maxMatchingScore = 0
             let seeker = seekingParticipants[0]
             var matchingPartner = seekingParticipants[1]
             for index in 1..<seekingParticipants.count {
                 let potentialPartner = seekingParticipants[index]
                 matchingScore = Match(seeker: seeker, partner: potentialPartner).score
-                if oldMatchingScore < matchingScore {
+                if maxMatchingScore < matchingScore {
                     matchingPartner = potentialPartner
-                    oldMatchingScore = matchingScore
+                    maxMatchingScore = matchingScore
                 }
             }
             if matchingScore == 0 {
                 print("\(seeker.name) and \(matchingPartner.name) are not a good match.")
             } else {
-            print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(oldMatchingScore)/20.")
+                print("\(seeker.name) and \(matchingPartner.name) are a good match with a matching score of \(maxMatchingScore)/20.")
+                sumScore += maxMatchingScore
             }
             seekingParticipants.removeAll { $0.name == seeker.name }
             seekingParticipants.removeAll { $0.name == matchingPartner.name }
         }
+        print("This group has a matching score of \(sumScore).")
         
         /// Print a new line to separate sections.
         print("\n")
