@@ -57,10 +57,10 @@ class Match: Equatable {
                 iterations = checkIndex(pairs.count, index)
                 let match = pairs[iterations]
                 possiblePairs.append(match)
-                pairs.removeAll { $0.seeker == match.seeker }
-                pairs.removeAll { $0.seeker == match.partner }
-                pairs.removeAll { $0.partner == match.partner }
-                pairs.removeAll { $0.partner == match.seeker }
+                pairs = pairs.filter({ $0.seeker != match.seeker
+                                    && $0.seeker != match.partner
+                                    && $0.partner != match.partner
+                                    && $0.partner != match.seeker})
             }
             
             pairsScore = possiblePairs.reduce(0, {$0 + $1.score})
