@@ -67,7 +67,7 @@ class Match: Equatable {
     /// - Parameter elements: Array to combine
     /// - Parameter taking: Picking item count from array
     /// - Returns: Returns combinations of elements without repetition.
-    public static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
+    private static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
         guard elements.count >= taking else { return [] }
         guard elements.count > 0 && taking > 0 else { return [[]] }
         
