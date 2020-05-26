@@ -44,34 +44,35 @@ class Match: Equatable {
     /// - Returns: Best matching pairs
     static func bestMatches(from participants: [Person]) -> [Match] {
         var maxScore = 0
-        var bestPairs = [Match]()
-        let allPossiblePairs = Match.matchingPairs(from: Match.pairsCombinations(from: participants, taking: 2))
+        var bestMatches = [Match]()
+        let allPossibleMatches = Match.pairsCombinations(from: participants, taking: 2)
+                                .map {pair in Match(seeker: pair[0], partner: pair[1])}
         
-        for index in 0..<allPossiblePairs.count {
-            var pairsScore = 0
+        for index in 0..<allPossibleMatches.count {
+            var allMatchesScore = 0
             var iterations = index
-            var possiblePairs = [Match]()
-            var pairs = allPossiblePairs
+            var possibleMatches = [Match]()
+            var matches = allPossibleMatches
             
-            while pairs.count != 0 {
-                iterations = checkIndex(pairs.count, index)
-                let match = pairs[iterations]
-                possiblePairs.append(match)
-                pairs = pairs.filter({ $0.seeker != match.seeker
+            while matches.count != 0 {
+                iterations = checkIndex(matches.count, index)
+                let match = matches[iterations]
+                possibleMatches.append(match)
+                matches = matches.filter({ $0.seeker != match.seeker
                                     && $0.seeker != match.partner
                                     && $0.partner != match.partner
                                     && $0.partner != match.seeker})
             }
             
-            pairsScore = possiblePairs.reduce(0, {$0 + $1.score})
-            if maxScore < pairsScore {
-                maxScore = pairsScore
-                bestPairs = possiblePairs
+            allMatchesScore = possibleMatches.reduce(0, {$0 + $1.score})
+            if maxScore < allMatchesScore {
+                maxScore = allMatchesScore
+                bestMatches = possibleMatches
             }
         }
         
-        print("This group has a matching score of \(maxScore)/\(bestPairs.count * 20).")
-        return bestPairs
+        print("This group has a matching score of \(maxScore)/\(bestMatches.count * 20).")
+        return bestMatches
     }
     
     /// Check if the index is out of the array.
@@ -86,25 +87,11 @@ class Match: Equatable {
         return iterations
     }
     
-    /// Converting an array of arrays of pairs of people to matching pairs.
-    /// - Parameter pairs: Array of arrays of pairs
-    /// - Returns: Array of Matches
-    private static func matchingPairs(from pairs: [[Person]]) -> [Match] {
-        var matchingPairs = [Match]()
-        
-        for index in 0..<pairs.count {
-            let pair = pairs[index]
-            matchingPairs.append(Match(seeker: pair[0], partner: pair[1]))
-        }
-        
-        return matchingPairs
-    }
-    
     /// Given an array of people and how many of them we are taking, returns an array with all possible pairs combinations.
     /// - Parameter participants: Array of people to combine
     /// - Parameter taking: Picking people count from array
     /// - Returns: Returns combinations of participants pairs without repetition
-    private static func pairsCombinations<T>(from participants: [T], taking: Int) -> [[T]] {
+    private static func pairsCombinations(from participants: [Person], taking: Int) -> [[Person]] {
         guard participants.count >= taking else { return [] }
         guard participants.count > 0 && taking > 0 else { return [[]] }
         
@@ -112,7 +99,7 @@ class Match: Equatable {
             return participants.map {[$0]}
         }
         
-        var combinations = [[T]]()
+        var combinations = [[Person]]()
         
         for (index, participant) in participants.enumerated() {
             var reducedElements = participants
