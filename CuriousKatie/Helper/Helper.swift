@@ -92,6 +92,7 @@ struct Helper {
         while thereAreDuplicateNames(in: allPeople) {
             allPeople = generateAllPeople()
         }
+        
         if allPeople.count >= maximumNumberOfParticipants {
             return Array(allPeople.shuffled().prefix(Int.random(in: minimumNumberOfParticipants...maximumNumberOfParticipants)))
         } else {
@@ -104,5 +105,28 @@ struct Helper {
     static func thereAreDuplicateNames(in people: [Person]) -> Bool {
         let duplicates = Dictionary(grouping: people, by: { $0.name }).filter { $1.count > 1 }.keys
         return (duplicates.count >= 1)
+    }
+    
+    /// Given an array of elements and how many of them we are taking, returns an array with all possible combinations
+    /// without repetition. Please note that as repetition is not allowed, taking must always be less or equal to`elements.count`.
+    /// - Parameter elements: Array to combine
+    /// - Parameter taking: Picking item count from array
+    /// - Returns: Returns combinations of elements without repetition.
+    static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
+        guard elements.count >= taking else { return [] }
+        guard elements.count > 0 && taking > 0 else { return [[]] }
+        
+        if taking == 1 {
+            return elements.map {[$0]}
+        }
+        
+        var combinations = [[T]]()
+        for (index, element) in elements.enumerated() {
+            var reducedElements = elements
+            reducedElements.removeFirst(index + 1)
+            combinations += possibleCombinations(reducedElements, taking: taking - 1).map {[element] + $0}
+        }
+        
+        return combinations
     }
 }

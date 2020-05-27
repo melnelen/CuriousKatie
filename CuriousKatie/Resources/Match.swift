@@ -34,6 +34,7 @@ class Match: Equatable {
         let seekersInterests = seeker.interests.map { $0.name }
         let partnersInterests = partner.interests.map { $0.name }
         let differentInterests = seekersInterests.difference(from: partnersInterests)
+        
         return differentInterests.count
     }
     
@@ -45,7 +46,7 @@ class Match: Equatable {
     static func bestMatches(from participants: [Person]) -> [Match] {
         var maxScore = 0
         var bestMatches = [Match]()
-        let allPossibleMatches = Match.possibleCombinations(participants, taking: 2)
+        let allPossibleMatches = Helper.possibleCombinations(participants, taking: 2)
                                 .map {pair in Match(seeker: pair[0], partner: pair[1])}
         
         for index in 0..<allPossibleMatches.count {
@@ -72,6 +73,8 @@ class Match: Equatable {
         }
         
         print("This group has a matching score of \(maxScore)/\(bestMatches.count * 20).")
+        print("\n")
+        
         return bestMatches
     }
     
@@ -81,33 +84,12 @@ class Match: Equatable {
     /// - Returns: Either the index or in case the index is outside the array size - the last index
     private static func checkIndex(_ matches: [Match], _ index: Int) -> Int {
         var iterations = index
+        
         if matches.count <= index {
             let bestMatchScore = matches.map {$0.score}.max()
             iterations = matches.firstIndex(where: {$0.score == bestMatchScore})!
         }
+        
         return iterations
-    }
-    
-    /// Given an array of elements and how many of them we are taking, returns an array with all possible combinations
-    /// without repetition. Please note that as repetition is not allowed, taking must always be less or equal to`elements.count`.
-    /// - Parameter elements: Array to combine
-    /// - Parameter taking: Picking item count from array
-    /// - Returns: Returns combinations of elements without repetition.
-    private static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
-        guard elements.count >= taking else { return [] }
-        guard elements.count > 0 && taking > 0 else { return [[]] }
-        
-        if taking == 1 {
-            return elements.map {[$0]}
-        }
-        
-        var combinations = [[T]]()
-        for (index, element) in elements.enumerated() {
-            var reducedElements = elements
-            reducedElements.removeFirst(index + 1)
-            combinations += possibleCombinations(reducedElements, taking: taking - 1).map {[element] + $0}
-        }
-        
-        return combinations
     }
 }

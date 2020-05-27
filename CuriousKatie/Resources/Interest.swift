@@ -30,32 +30,38 @@ class Interest: Equatable {
     
     /// Share this interest
     /// - Parameter interest: an instance of Interest
-    static func share(_ interest: Interest) -> String {
+    func share() -> String {
         var interestConfession = ""
-        interestConfession += "\(interest.name). It is a \(interest.category) activity. It can be performed \(interest.environment) and it requires "
-        interestConfession += shareGearRequired(for: interest)
+        
+        interestConfession += "\(self.name). It is a \(self.category) activity. It can be performed \(self.environment) and it requires "
+        interestConfession += shareGearRequired()
         interestConfession += "to be practiced."
+        
         return interestConfession
     }
     
     /// Share a list of gear required for this interest
     /// - Parameter interest: an instance of Interest
-    static func shareGearRequired(for interest: Interest) -> String {
+    func shareGearRequired() -> String {
         var gearRequired = ""
-        for (index, gearItem) in interest.gear.enumerated() {
-            if interest.gear.count == 1 {
+        
+        for (index, gearItem) in self.gear.enumerated() {
+            
+            if self.gear.count == 1 {
                 gearRequired += "\(gearItem.rawValue) "
             } else {
+                
                 switch index {
-                case (interest.gear.endIndex - 1):
+                case (self.gear.endIndex - 1):
                     gearRequired += " and \(gearItem.rawValue) "
-                case (interest.gear.endIndex - 2):
+                case (self.gear.endIndex - 2):
                     gearRequired += "\(gearItem.rawValue)"
                 default:
                     gearRequired += "\(gearItem.rawValue), "
                 }
             }
         }
+        
         return gearRequired
     }
 }

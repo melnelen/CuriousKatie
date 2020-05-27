@@ -47,9 +47,11 @@ class Person: Equatable {
         
         /// Iterate through all of the person's interests and add them to their confession one by one.
         for (index, interest) in self.interests.enumerated() {
+            
             if interests.count == 1 {
                 interestsConfession += "\(interest.name)."
             } else {
+                
                 switch index {
                 case (self.interests.endIndex - 1):
                     interestsConfession += " and \(interest.name)."
@@ -60,6 +62,7 @@ class Person: Equatable {
                 }
             }
         }
+        
         return interestsConfession
     }
     
@@ -69,10 +72,12 @@ class Person: Equatable {
         guard sharedInterests.count != interests.count else {
             return nil
         }
+        
         let nextInterest = self.interests[sharedInterests.count]
         var nextInterestConfession = "\(self.name): I'm interested in "
-        nextInterestConfession += Interest.share(nextInterest)
+        nextInterestConfession += nextInterest.share()
         sharedInterests.append(nextInterest)
+        
         return nextInterestConfession
     }
 }
