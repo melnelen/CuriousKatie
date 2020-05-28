@@ -76,7 +76,8 @@ struct Helper {
     }
     
     /// Shuffle interests and pick a random amount between 1 and the maximum number of interests per person
-    /// *Note: in case the number of interests is smaller than maximum number of interests per person return at least the available;e number of interests
+    /// *Note: in case the number of interests is smaller than maximum number of interests per person return at least the available number of interests
+    /// - Returns: Array of random iterests
     static func pickSomeInterests() -> [Interest] {
         if allInterests.count >= maximumNumberOfInterestsPerPerson {
             return Array(allInterests.shuffled().prefix(Int.random(in: 1...maximumNumberOfInterestsPerPerson)))
@@ -87,11 +88,13 @@ struct Helper {
     
     /// Shuffle people and pick a random amount between the minimum number of participants and the maximum number of participants
     /// while ensuring there are no duplications in the names of the participants
-    /// *Note: in case the number of people is smaller than maximum number of participants return at least the available;e number of participants
+    /// *Note: in case the number of people is smaller than maximum number of participants return at least the available number of participants
+    /// - Returns: Array of people ready to participate
     static func pickSomePeople() -> [Person] {
         while thereAreDuplicateNames(in: allPeople) {
             allPeople = generateAllPeople()
         }
+        
         if allPeople.count >= maximumNumberOfParticipants {
             return Array(allPeople.shuffled().prefix(Int.random(in: minimumNumberOfParticipants...maximumNumberOfParticipants)))
         } else {
@@ -101,8 +104,44 @@ struct Helper {
     
     /// Checking if there are duplications in names in an array of people
     /// - Parameter people: An array of type Person
+    /// - Returns: True if there is one or more duplications
     static func thereAreDuplicateNames(in people: [Person]) -> Bool {
         let duplicates = Dictionary(grouping: people, by: { $0.name }).filter { $1.count > 1 }.keys
-        return (duplicates.count >= 1)
+        
+        return duplicates.count >= 1
+    }
+    
+    /// Check if all participants have been matched. If not ret
+    /// - Parameter matches: Array of matches
+    /// - Parameter participants: Array of people participating in the game
+    /// - Returns: A lonely participant if there is one. If there is none - returns nil
+    static func checkForLonelyParticipant(in matches: [Match], from participants: [Person]) -> Person? {
+        let matchedParticipants = Set(matches.map {match in [match.seeker, match.partner]}.flatMap {$0})
+        let lonelyParticipants = matchedParticipants.symmetricDifference(Set(participants))
+        
+        return lonelyParticipants.first
+    }
+    
+    /// Given an array of elements and how many of them we are taking, returns an array with all possible combinations
+    /// without repetition. Please note that as repetition is not allowed, taking must always be less or equal to`elements.count`.
+    /// - Parameter elements: Array to combine
+    /// - Parameter taking: Picking item count from array
+    /// - Returns: Returns combinations of elements without repetition
+    static func possibleCombinations<T>(_ elements: [T], taking: Int) -> [[T]] {
+        guard elements.count >= taking else { return [] }
+        guard elements.count > 0 && taking > 0 else { return [[]] }
+        
+        if taking == 1 {
+            return elements.map {[$0]}
+        }
+        
+        var combinations = [[T]]()
+        for (index, element) in elements.enumerated() {
+            var reducedElements = elements
+            reducedElements.removeFirst(index + 1)
+            combinations += possibleCombinations(reducedElements, taking: taking - 1).map {[element] + $0}
+        }
+        
+        return combinations
     }
 }
