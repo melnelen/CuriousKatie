@@ -30,6 +30,7 @@ class Interest: Equatable {
     
     /// Share this interest
     /// - Parameter interest: an instance of Interest
+    /// - Returns: A string describing the interest including it's name, category, enviro
     func share() -> String {
         var interestConfession = ""
         
@@ -42,6 +43,7 @@ class Interest: Equatable {
     
     /// Share a list of gear required for this interest
     /// - Parameter interest: an instance of Interest
+    /// - Returns: A string with a list of gear items
     func shareGearRequired() -> String {
         var gearRequired = ""
         

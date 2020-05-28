@@ -8,7 +8,7 @@
 
 import Fakery
 
-class Person: Equatable {
+class Person: Equatable, Hashable {
     /// Properties of the Person object.
     var name: String
     let age: Int
@@ -36,12 +36,21 @@ class Person: Equatable {
         return lhs.name == rhs.name
     }
     
+    /// Creating a unique hash value
+    /// - Parameter hasher: unique value
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(location)
+    }
+    
     /// Creates an introduction message.
+    /// - Returns: Message with the person's name, age, sex and location
     func introduceMyself() -> String {
         return "Hello, my name is \(self.name). I'm a \(self.age) years old \(self.sex) and I live in \(self.location)."
     }
     
     /// Have a person share all of their interests.
+    /// - Returns: A confession including the person's name and a full list of interests
     func shareAllInterests() -> String {
         var interestsConfession = "\(self.name): I'm interested in "
         
@@ -68,6 +77,7 @@ class Person: Equatable {
     
     /// Share one of the person's interests that hasn't been shared yet
     /// Note: We are sure that the person has at least one interest
+    /// - Returns: A confession including the person's name and one of their interests that they haven't shared yet
     func shareNextInterest() -> String? {
         guard sharedInterests.count != interests.count else {
             return nil
