@@ -38,44 +38,48 @@ class Match: Equatable {
         return differentInterests.count
     }
     
-    /// Finding the best matching pairs combination from an array of People.
+    /// Find the best matching pairs group from an array of People.
     /// The best pairs are determined by how high is the combined score of all the possible matches in the array of People.
-    /// The array with the highest combined score is the one with the best matches.
+    /// The group with the highest score is the one with the best matches.
     /// - Parameter participants: Array of People participating
-    /// - Returns: Best matching pairs
+    /// - Returns: Best matching pairs group
     static func bestMatches(from participants: [Person]) -> [Match] {
-        var maxScore = 0
-        var bestMatches = [Match]()
+        var maxGroupScore = 0
+        var bestGroupOfMatches = [Match]()
         let allPossibleMatches = Helper.possibleCombinations(participants, taking: 2)
                                 .map {pair in Match(seeker: pair[0], partner: pair[1])}
         
+        // Create all possible groups of matches
         for index in 0..<allPossibleMatches.count {
-            var allMatchesScore = 0
+            var groupScore = 0
             var iterations = index
-            var possibleMatches = [Match]()
+            var possibleGroup = [Match]()
             var matches = allPossibleMatches
 
+            // Choose a match and remove all other matches with
+            // duplicating participants
             while matches.count != 0 {
                 iterations = checkIndex(matches, index)
                 let match = matches[iterations]
-                possibleMatches.append(match)
+                possibleGroup.append(match)
                 matches = matches.filter({$0.seeker != match.seeker
                                     && $0.seeker != match.partner
                                     && $0.partner != match.partner
                                     && $0.partner != match.seeker})
             }
 
-            allMatchesScore = possibleMatches.reduce(0, {$0 + $1.score})
-            if maxScore < allMatchesScore {
-                maxScore = allMatchesScore
-                bestMatches = possibleMatches
+            // Choose the best group of matches
+            groupScore = possibleGroup.reduce(0, {$0 + $1.score})
+            if maxGroupScore < groupScore {
+                maxGroupScore = groupScore
+                bestGroupOfMatches = possibleGroup
             }
         }
         
-        print("This group has a matching score of \(maxScore)/\(bestMatches.count * 20).")
+        print("This group has a matching score of \(maxGroupScore)/\(bestGroupOfMatches.count * 20).")
         print("\n")
         
-        return bestMatches
+        return bestGroupOfMatches
     }
     
     /// Check if the index is out of the array.
